@@ -6,67 +6,68 @@ global $drive;
 
 global $EnvConfigs;
 $EnvConfigs = [
+    // 1 is a switch, 0 input string
     // 1 inner, 0 common
     // 1 showed/enableEdit, 0 hidden/disableEdit
     // 1 base64 to save, 0 not base64
-    'APIKey'            => 0b000, // used in heroku.
-    'SecretId'          => 0b000, // used in SCF/CFC.
-    'SecretKey'         => 0b000, // used in SCF/CFC.
-    'AccessKeyID'       => 0b000, // used in FC.
-    'AccessKeySecret'   => 0b000, // used in FC.
-    'HW_urn'            => 0b000, // used in FG.
-    'HW_key'            => 0b000, // used in FG.
-    'HW_secret'         => 0b000, // used in FG.
-    'HerokuappId'       => 0b000, // used in heroku.
+    'APIKey'            => 0b0000, // used in heroku.
+    'SecretId'          => 0b0000, // used in SCF/CFC.
+    'SecretKey'         => 0b0000, // used in SCF/CFC.
+    'AccessKeyID'       => 0b0000, // used in FC.
+    'AccessKeySecret'   => 0b0000, // used in FC.
+    'HW_urn'            => 0b0000, // used in FG.
+    'HW_key'            => 0b0000, // used in FG.
+    'HW_secret'         => 0b0000, // used in FG.
+    'HerokuappId'       => 0b0000, // used in heroku.
 
-    'admin'             => 0b000,
-    'adminloginpage'    => 0b010,
-    'autoJumpFirstDisk' => 0b010,
-    'background'        => 0b011,
-    'backgroundm'       => 0b011,
-    'disableShowThumb'  => 0b010,
-    //'disableChangeTheme'=> 0b010,
-    'disktag'           => 0b000,
-    'hideFunctionalityFile'=> 0b010,
-    'timezone'          => 0b010,
-    'passfile'          => 0b011,
-    'sitename'          => 0b011,
-    'customScript'      => 0b011,
-    'customCss'         => 0b011,
-    'customTheme'       => 0b011,
-    'theme'             => 0b010,
-    'useBasicAuth'      => 0b010,
-    'referrer'          => 0b011,
-    'forceHttps'        => 0b010,
-    'globalHeadOmfUrl'  => 0b011,
-    'globalHeadMdUrl'   => 0b011,
-    'globalReadmeMdUrl' => 0b011,
-    'globalFootOmfUrl'  => 0b011,
-    'bcmathUrl'         => 0b011,
+    'admin'             => 0b0000,
+    'adminloginpage'    => 0b0010,
+    'autoJumpFirstDisk' => 0b1010,
+    'background'        => 0b0011,
+    'backgroundm'       => 0b0011,
+    'disableShowThumb'  => 0b1010,
+    //'disableChangeTheme'=> 0b1010,
+    'disktag'           => 0b0000,
+    'hideFunctionalityFile'=> 0b1010,
+    'timezone'          => 0b0010,
+    'passfile'          => 0b0011,
+    'sitename'          => 0b0011,
+    'customScript'      => 0b0011,
+    'customCss'         => 0b0011,
+    'customTheme'       => 0b0011,
+    'theme'             => 0b0010,
+    'useBasicAuth'      => 0b1010,
+    'referrer'          => 0b0011,
+    'forceHttps'        => 0b1010,
+    'globalHeadOmfUrl'  => 0b0011,
+    'globalHeadMdUrl'   => 0b0011,
+    'globalReadmeMdUrl' => 0b0011,
+    'globalFootOmfUrl'  => 0b0011,
+    'bcmathUrl'         => 0b0011,
 
-    'Driver'            => 0b100,
-    'client_id'         => 0b100,
-    'client_secret'     => 0b101,
-    'sharepointSite'    => 0b101,
-    'shareurl'          => 0b101,
-    //'sharecookie'       => 0b101,
-    'shareapiurl'       => 0b101,
-    'siteid'            => 0b100,
-    'refresh_token'     => 0b100,
-    'token_expires'     => 0b100,
-    'activeLimit'       => 0b100,
-    'driveId'           => 0b100,
+    'Driver'            => 0b0100,
+    'client_id'         => 0b0100,
+    'client_secret'     => 0b0101,
+    'sharepointSite'    => 0b0101,
+    'shareurl'          => 0b0101,
+    //'sharecookie'       => 0b0101,
+    'shareapiurl'       => 0b0101,
+    'siteid'            => 0b0100,
+    'refresh_token'     => 0b0100,
+    'token_expires'     => 0b0100,
+    'activeLimit'       => 0b0100,
+    'driveId'           => 0b0100,
 
-    'diskDisplay'      => 0b110,
-    'diskname'          => 0b111,
-    'diskDescription'   => 0b111,
-    'domain_path'       => 0b111,
-    'downloadencrypt'   => 0b110,
-    'guestup_path'      => 0b111,
-    'domainforproxy'    => 0b111,
-    'public_path'       => 0b111,
-    'fileConduitSize'   => 0b110,
-    'fileConduitCacheTime'   => 0b110,
+    'diskDisplay'      => 0b0110,
+    'diskname'          => 0b0111,
+    'diskDescription'   => 0b0111,
+    'domain_path'       => 0b0111,
+    'downloadencrypt'   => 0b1110,
+    'guestup_path'      => 0b0111,
+    'domainforproxy'    => 0b0111,
+    'public_path'       => 0b0111,
+    'fileConduitSize'   => 0b0110,
+    'fileConduitCacheTime'   => 0b0110,
 ];
 
 $timezones = array( 
@@ -106,28 +107,35 @@ $timezones = array(
 function isCommonEnv($str)
 {
     global $EnvConfigs;
-    if (isset($EnvConfigs[$str])) return ( $EnvConfigs[$str] & 0b100 ) ? false : true;
+    if (isset($EnvConfigs[$str])) return ( $EnvConfigs[$str] & 0b0100 ) ? false : true;
     else return null;
 }
 
 function isInnerEnv($str)
 {
     global $EnvConfigs;
-    if (isset($EnvConfigs[$str])) return ( $EnvConfigs[$str] & 0b100 ) ? true : false;
+    if (isset($EnvConfigs[$str])) return ( $EnvConfigs[$str] & 0b0100 ) ? true : false;
     else return null;
 }
 
 function isShowedEnv($str)
 {
     global $EnvConfigs;
-    if (isset($EnvConfigs[$str])) return ( $EnvConfigs[$str] & 0b010 ) ? true : false;
+    if (isset($EnvConfigs[$str])) return ( $EnvConfigs[$str] & 0b0010 ) ? true : false;
     else return null;
 }
 
 function isBase64Env($str)
 {
     global $EnvConfigs;
-    if (isset($EnvConfigs[$str])) return ( $EnvConfigs[$str] & 0b001 ) ? true : false;
+    if (isset($EnvConfigs[$str])) return ( $EnvConfigs[$str] & 0b0001 ) ? true : false;
+    else return null;
+}
+
+function isSwitchEnv($str)
+{
+    global $EnvConfigs;
+    if (isset($EnvConfigs[$str])) return ( $EnvConfigs[$str] & 0b1000 ) ? true : false;
     else return null;
 }
 
@@ -180,7 +188,7 @@ function main($path)
         if (substr($_GET['jsFile'], -3)!='.js') return output('', 403);
         if (!($path==''||$path=='/')) return output('', 308, [ 'Location' => path_format($_SERVER['base_path'] . '/?jsFile=' . $_GET['jsFile']) ]);
         if (strpos($_GET['jsFile'], '/')>-1) $_GET['jsFile'] = splitlast($_GET['jsFile'], '/')[1];
-        $jsFile = file_get_contents('js/' . $_GET['jsFile']);
+        $jsFile = file_get_contents(__DIR__ . '/js/' . $_GET['jsFile']);
         if (!!$jsFile) {
             return output( base64_encode($jsFile), 200, [ 'Content-Type' => 'text/javascript; charset=utf-8', 'Cache-Control' => 'max-age=' . 3*24*60*60 ], true );
         } else {
@@ -664,6 +672,7 @@ function isHideFile($name)
         'foot.omf',
         'favicon.ico',
         'robots.txt',
+        'index.htm',
         'index.html',
     ];
 
@@ -1416,7 +1425,7 @@ function EnvOpt($needUpdate = 0)
     if (isset($_POST['submit1'])) if (compareadminmd5('admin', getConfig('admin'), $_COOKIE['admin'], $_POST['_admin'])) {
         $_SERVER['disk_oprating'] = '';
         foreach ($_POST as $k => $v) {
-            if (isShowedEnv($k) || $k=='disktag_del' || $k=='disktag_add' || $k=='disktag_rename' || $k=='disktag_copy') {
+            if (isShowedEnv($k) || $k=='disktag_del' || $k=='disktag_add' || $k=='disktag_rename' || $k=='disktag_copy' || $k=='client_secret') {
                 $tmp[$k] = $v;
             }
             if ($k=='disktag_newname') {
@@ -1617,6 +1626,13 @@ output:
             $frame .= '
                 </select>
                 ' . getconstStr('EnvironmentsDescription')[$key];
+        } elseif (isSwitchEnv($key)) {
+            $frame .= '
+                <select name="' . $key . '">
+                    <option value=""></option>
+                    <option value="1"' . (getConfig($key)?' selected="selected"':'') . '>true</option>
+                </select>
+                ' . getconstStr('EnvironmentsDescription')[$key];
         } /*elseif ($key=='domain_path') {
             $tmp = getConfig($key);
             $domain_path = '';
@@ -1674,6 +1690,9 @@ output:
     </td>
 </tr>
 </table>
+<form name="' . $disktag . '" action="" method="post">
+    <input name="_admin" type="hidden" value="">
+    <input type="hidden" name="disk" value="' . $disktag . '">
 <table border=1 width=100%>
     <tr>
         <td>Driver</td>
@@ -1681,6 +1700,18 @@ output:
         if ($diskok) $frame .= ' <a href="?AddDisk=' . get_class($disk_tmp) . '&disktag=' . $disktag . '&SelectDrive">' . getconstStr('ChangeDrivetype') . '</a>';
         $frame .= '</td>
     </tr>';
+        if (getConfig('client_id', $disktag) && getConfig('client_secret', $disktag)) {
+            $frame .= '
+    <tr>
+        <td>client_id</td>
+        <td>' . getConfig('client_id', $disktag) . '</td>
+    </tr>';
+            $frame .= '
+    <tr>
+        <td>client_secret</td>
+        <td><input type="text" name="client_secret" value="' . getConfig('client_secret', $disktag) . '" placeholder="' . getconstStr('EnvironmentsDescription')['client_secret'] . '" style="width:100%"></td>
+    </tr>';
+        }
         if ($diskok) {
             $frame .= '
     <tr>
@@ -1694,35 +1725,36 @@ output:
     </tr>';
             }
 
-            $frame .= '
-<form name="' . $disktag . '" action="" method="post">
-    <input name="_admin" type="hidden" value="">
-    <input type="hidden" name="disk" value="' . $disktag . '">';
             foreach ($EnvConfigs as $key => $val) if (isInnerEnv($key) && isShowedEnv($key)) {
-                if ($key=='diskDisplay') {
-                    $frame .= '
+                $frame .= '
     <tr>
         <td><label>' . $key . '</label></td>
-        <td width=100%>
+        <td width=100%>';
+                if ($key=='diskDisplay') {
+                    $frame .= '
             <select name="' . $key . '">
                 <option value=""' . (getConfig($key, $disktag)===''?' selected':'') . '> </option>
                 <option value="hidden"' . (getConfig($key, $disktag)==='hidden'?' selected':'') . '>hidden</option>
                 <option value="disable"' . (getConfig($key, $disktag)==='disable'?' selected':'') . '>disable</option>
             </select>
-            ' . getconstStr('EnvironmentsDescription')[$key] . '
-        </td>
-    </tr>';
+            ' . getconstStr('EnvironmentsDescription')[$key];
+                } elseif (isSwitchEnv($key)) {
+                    $frame .= '
+            <select name="' . $key . '">
+                <option value=""></option>
+                <option value="1"' . (getConfig($key)?' selected="selected"':'') . '>true</option>
+            </select>
+            ' . getconstStr('EnvironmentsDescription')[$key];
                 } else {
                     $frame .= '
-    <tr>
-        <td><label>' . $key . '</label></td>
-        <td width=100%><input type="text" name="' . $key . '" value="' . getConfig($key, $disktag) . '" placeholder="' . getconstStr('EnvironmentsDescription')[$key] . '" style="width:100%"></td>
-    </tr>';
+            <input type="text" name="' . $key . '" value="' . getConfig($key, $disktag) . '" placeholder="' . getconstStr('EnvironmentsDescription')[$key] . '" style="width:100%">';
                 }
+                $frame .= '
+        </td>
+    </tr>';
             }
             $frame .= '
-    <tr><td></td><td><input type="submit" name="submit1" value="' . getconstStr('Setup') . '"></td></tr>
-</form>';
+    <tr><td></td><td><input type="submit" name="submit1" value="' . getconstStr('Setup') . '"></td></tr>';
         } else {
             $frame .= '
 <tr>
@@ -1731,6 +1763,7 @@ output:
         }
         $frame .= '
 </table>
+</form>
 
 <script>
     function deldiskconfirm(t) {
@@ -1874,7 +1907,7 @@ output:
             $canOneKeyUpate = 1;
         } elseif (isset($_SERVER['BCE_CFC_RUNTIME_NAME'])&&$_SERVER['BCE_CFC_RUNTIME_NAME']=='php7') {
             $canOneKeyUpate = 1;
-        } elseif (isset($_SERVER['_APP_SHARE_DIR'])&&$_SERVER['_APP_SHARE_DIR']==='/var/share/CFF/processrouter') {
+        } elseif (isset($_SERVER['RUNTIME_LOG_PATH']) && $_SERVER['RUNTIME_LOG_PATH']=='/home/snuser/log') {
             $canOneKeyUpate = 1;
         } elseif (isset($_SERVER['DOCUMENT_ROOT'])&&$_SERVER['DOCUMENT_ROOT']==='/var/task/user') {
             $canOneKeyUpate = 1;
@@ -2192,6 +2225,10 @@ function render_list($path = '', $files = [])
 
     if (isset($files['list']['index.html']) && !$_SERVER['admin']) {
         $htmlcontent = get_content(path_format($path . '/index.html'))['content'];
+        return output($htmlcontent['body'], $htmlcontent['stat']);
+    }
+    if (isset($files['list']['index.htm']) && !$_SERVER['admin']) {
+        $htmlcontent = get_content(path_format($path . '/index.htm'))['content'];
         return output($htmlcontent['body'], $htmlcontent['stat']);
     }
     //$path = str_replace('%20','%2520',$path);
